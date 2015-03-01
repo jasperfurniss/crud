@@ -1,0 +1,21 @@
+
+{{#link-to "items.new"}}<strong>New Post</strong>{{/link-to}}
+
+{{outlet}}
+
+{{#each item in sortedGroups itemController="item"}}
+
+<div class="item comment">
+  <!-- {{#if item.isEditing}} -->
+  <div class="comment-image">
+    <img {{bind-attr src=item.model.image}} alt="Logo image">
+  </div>
+  <div class="comment-content">
+    <h1>{{model}}</h1>
+    <!-- <p>{{item.model.description}}</p> -->
+    <p class="comment-detail">Date or details about this post</p>
+  </div>
+</div>
+
+
+{{/each}}

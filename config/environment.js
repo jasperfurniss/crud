@@ -14,10 +14,20 @@ module.exports = function(environment) {
     },
 
     APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    }
-  };
+    // Here you can pass flags/options to your application instance
+    // when it is created
+  },
+
+contentSecurityPolicy: {
+  'default-src': "'none'",
+  'script-src': "'self' http://localhost:4200 ",
+  'font-src': "'self' http://fonts.googleapis.com http://fonts.gstatic.com",
+  'connect-src': "'self' https://api.parse.com",
+  'img-src': "'self' https://raw.githubusercontent.com/ https://unsplash.imgix.net",
+  'style-src': "'self' http://localhost:4200 http://fonts.googleapis.com",
+  'media-src': "'self'"
+}
+};
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

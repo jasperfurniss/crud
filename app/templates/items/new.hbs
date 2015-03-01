@@ -1,0 +1,9 @@
+<form>
+{{input type="text" class="new-title" placeholder="Enter a new title" value=newTitle}}
+
+{{textarea class="new-body" placeholder="Enter a new item" value=newBody}}
+
+<button {{action "createItem" newTitle newBody}}>Create</button>
+</form>
+
+{{outlet}}

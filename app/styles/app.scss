@@ -1,0 +1,305 @@
+/*******************
+     IMPORTS
+*******************/
+
+@import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
+@import 'base/base';
+@import 'bower_components/neat/app/assets/stylesheets/neat';
+@import 'base/typography';
+@import 'base/lists';
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+
+
+
+$visual-grid: false;
+$gutter: none;
+
+/**********************
+    COLORS & Themes
+***********************/
+
+/******************
+      Brazil
+*******************/
+$northtexasgreen: #009B3A;
+$goldenyellow: #FEDF00;
+$catalinablue: #002776;
+
+/*******************
+      Alladin
+********************/
+
+$color1: #47e5bc;
+$color2: #247ba0;
+$color3: #b2dbbf;
+$color4: #f3ffbd;
+$color5: #ff1654;
+
+/*******************
+  Neon Ninja Turtle
+********************/
+
+$color6: #99ff00;
+$color7: #000000;
+$color8: #000000;
+$color9: #444545;
+$color10: #c3dbc5;
+
+/*******************
+       Robin
+********************/
+
+$color11: #ccc7b9;
+$color12: #eaf9d9;
+$color13: #ed474a;
+$color14: #e2d4ba;
+$color15: #cdd6d0;
+
+/*******************
+     Blackbeard
+********************/
+
+$color16: #1c0f13;
+$color17: #6e7e85;
+$color18: #b7cece;
+$color19: #bbbac6;
+$color20: #e2e2e2;
+
+/*******************
+I Was Born In The Dark
+********************/
+$color21: #af9b46;
+$color22: #e1b07e;
+$color23: #1f1300;
+$color24: #dfd6a7;
+$color25: #0f1a20;
+
+
+/*******************
+       FONTS
+*******************/
+
+$primary-font: 'Oswald', sans-serif;
+$secondary-font: 'Cedarville Cursive', cursive;
+
+/*********************************************************
+                *****  LAYOUT  ******
+*********************************************************/
+
+
+@mixin grid-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+
+.grid-items {
+  ///////////////////////////////////////////////////////////////////////////////////
+  $base-accent-color: #477DCA !default;
+  $base-background-color: white !default;
+  $medium-screen: em(640) !default;
+  $large-screen: em(860) !default;
+
+  p {
+    line-height: 1.5em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  //////////////////////////////////////////////////////////////////////////////////
+
+  $grid-items-background: $base-background-color;
+  $grid-item-background: desaturate($base-accent-color, 30%);
+  $grid-item-colors:
+    desaturate($base-accent-color, 30%),
+    #3581A5,
+    #5FBEBE,
+    #98C79A,
+    #A7A891,
+    #BDCC97,
+    #979EA0;
+  $grid-item-border-size: 9px;
+  $grid-item-columns: 4;
+  $grid-item-big-columns: 8;
+  $grid-item-color: white;
+  $grid-item-height: 14em;
+
+  @include clearfix;
+
+  .grid-item {
+    @include transition (all 0.2s ease-in-out);
+    background: $grid-item-background;
+    border-bottom: $grid-item-border-size solid $grid-items-background;
+    border-left: ($grid-item-border-size / 2) solid $grid-items-background;
+    border-right: ($grid-item-border-size / 2) solid $grid-items-background;
+    border-top: 0;
+    cursor: pointer;
+    float: left;
+    height: $grid-item-height;
+    overflow: hidden;
+    outline: none;
+    padding: 2em;
+    text-align: center;
+    width: 100%;
+
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-columns);
+    }
+
+    @for $i from 1 through length($grid-item-colors) { // assign colors from $grid-item-colors list
+      &:nth-child(#{$i}) {
+        $background-from-list: nth($grid-item-colors, $i);
+        background-color: $background-from-list;
+        box-shadow: inset 0px 0px 1px 2px darken($background-from-list, 10%);
+
+        &:focus,
+        &:hover {
+          background-color: darken($background-from-list, 10%);
+          background-repeat: no-repeat;
+          background-position: top;
+          background-size: cover;
+        }
+      }
+    }
+  }
+
+  .grid-item img {
+      display: block;
+      height: 3em;
+      margin-bottom: 1em;
+      margin: auto;
+    }
+
+  .grid-item h1 {
+      color: $grid-item-color;
+      font-size: 1.3em;
+      margin-bottom: 0.4em;
+    }
+
+  .grid-item p {
+      margin: auto;
+      color: transparentize($grid-item-color, 0.3);
+
+      @include media($medium-screen) {
+        max-width: 70%;
+      }
+    }
+
+  .grid-item-big {
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-big-columns);
+    }
+    p {
+      @include media($medium-screen) {
+        max-width: 60%;
+      }
+    }
+  }
+
+  .grid-item-image {
+    background: url("https://unsplash.imgix.net/photo-1423666639041-f56000c27a9a?q=75&fm=jpg&s=d36ce846cbb4e045f6f2d071b8df6590");
+    background-color: $grid-item-background;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.comment {
+  ///////////////////////////////////////////////////////////////////////////////////
+  $base-border-radius: 3px !default;
+  $base-spacing: 1.5em !default;
+  $base-accent-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  //////////////////////////////////////////////////////////////////////////////////
+
+  $comment-gutter: 1.4em;
+  $comment-image-padding: 0.7em;
+  $comment-image-width: 4em;
+  $comment-color: $base-font-color;
+  $comment-background: lighten($base-accent-color, 15%);
+  $comment-detail-color: transparentize($comment-color, 0.5);
+  $comment-image-vert-alignment: top;
+
+  border-bottom: 1px solid transparentize($comment-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  padding-bottom: 1em;
+  width: 100%;
+
+  .comment-image,
+  .comment-content {
+    display: table-cell;
+    vertical-align: $comment-image-vert-alignment;
+  }
+
+  .comment-image {
+    padding-right: $comment-gutter;
+
+    > img {
+  background: $comment-background;
+  border-radius: $base-border-radius;
+  display: block;
+  height: auto;
+  max-width: none;
+  padding: $comment-image-padding;
+  width: $comment-image-width;
+    }
+
+    .comment-reverse-order & {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .comment-content {
+    width: 100%;
+
+    h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
+
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p.comment-detail {
+      color: $comment-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+  }
+}
+
+
+
+/* * {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+body {
+@include outer-container(block-collapse);
+  margin: 0 auto;
+  width: 100%;
+  background-color: $color1;
+  font-family: $primary-font;
+  color: $color7;
+}
+
+
+
+span {
+  @include span-columns(3);
+@include omega(4n);
+  border: solid 2px black;
+  height: 300px;
+  font-size: 250%;
+  vertical-align: center;
+  margin: 0 auto;
+
+} */
